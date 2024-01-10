@@ -17,6 +17,12 @@ module.exports = {
       "warn",
       { allowConstantExport: true },
     ],
+    "prettier/prettier": [
+      "error",
+      {
+        endOfLine: "auto",
+      },
+    ],
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
     "no-console": "off",
@@ -66,12 +72,6 @@ module.exports = {
     ],
     "arrow-body-style": ["error", "as-needed"],
     "arrow-spacing": ["error"],
-    "no-confusing-arrow": [
-      "error",
-      {
-        allowParens: true,
-      },
-    ],
     "no-useless-computed-key": ["error"],
     "no-useless-rename": ["error"],
     "object-shorthand": ["error", "always"],

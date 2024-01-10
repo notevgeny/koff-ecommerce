@@ -1,7 +1,11 @@
-import "./App.css";
+import { Footer } from "./views/Footer/Footer";
+import { Header } from "./views/Header/Header";
 
-function App() {
-  return <></>;
-}
+const App = () => (
+  <>
+    <Header />
+    <Footer />
+  </>
+);
 
 export default App;
