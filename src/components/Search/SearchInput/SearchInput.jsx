@@ -4,6 +4,7 @@ export const SearchInput = () => (
     <input
       className={style.input}
       type="search"
+      name="search"
       placeholder="Введите запрос"></input>
     <button className={style.searchBtn}>
       <svg

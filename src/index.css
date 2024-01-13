@@ -26,6 +26,7 @@
 
 :root {
   --main: #1c1c1c;
+  --light: #f1e9e4;
   --violet: #780096;
   --form: #eeeff2;
   --gray: #969EAE;
@@ -51,6 +52,10 @@ body {
   font-size: 12px;
   font-weight: 400;
   color: var(--main);
+}
+
+main {
+  min-height: 50svh;
 }
 
 img {

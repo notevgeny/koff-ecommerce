@@ -70,7 +70,6 @@ module.exports = {
         functions: false,
       },
     ],
-    "arrow-body-style": ["error", "as-needed"],
     "arrow-spacing": ["error"],
     "no-useless-computed-key": ["error"],
     "no-useless-rename": ["error"],

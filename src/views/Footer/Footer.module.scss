@@ -1,0 +1,119 @@
+.footer {
+    background-color: var(--main);
+    color: var(--light);
+    padding: 32px 0 40px;
+  
+    @media (min-width: 820px) {
+      padding-top: 40px;
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  
+    @media (min-width: 580px) {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @media (min-width: 820px) {
+        gap: 32px;
+    }
+}
+  
+.logo {
+    width: 230px;
+  
+    @media (min-width: 580px) {
+        grid-column: 1/2;
+    }
+
+    @media (min-width: 820px) {
+        width: 331px;
+    }
+}
+  
+.contacts {
+    @media (min-width: 580px) {
+        grid-column: 2/3;
+        justify-self: end;
+    }
+
+    .phone {
+        display: flex;
+
+        &:hover {
+            color: var(--violet);
+        }
+        svg {
+            fill: white;
+          }
+    
+          &:hover,
+          &:active {
+            color: var(--violet);
+    
+            path {
+              fill: var(--violet);
+            }
+          }
+    
+          &:focus-visible {
+            color: var(--violet);
+            outline-color: var(--violet);
+          }
+    }
+    .socials {
+        margin-top: 20px;
+
+        a {
+            &:not(:first-child){
+                margin-left: 8px;
+            }
+            
+            svg {
+                fill: white;
+              }
+        
+              &:hover,
+              &:active {
+                color: var(--violet);
+        
+                path {
+                  fill: var(--violet);
+                }
+              }
+        
+              &:focus-visible {
+                color: var(--violet);
+                outline-color: var(--violet);
+              }
+        }   
+    }
+}
+  
+.developerList {
+    @media (min-width: 580px) {
+        grid-column: 1/2;
+    }
+}
+  
+.developerItem {
+      margin-bottom: 8px;
+  
+      &:last-child {
+        margin-bottom: 0;
+      }
+      a:hover {
+        color: var(--violet);
+      }
+    }
+  
+.copyright {
+    @media (min-width: 580px) {
+        grid-column: 1/2;
+    }
+}
+  
