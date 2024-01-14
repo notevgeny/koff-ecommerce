@@ -3,7 +3,9 @@ import style from "./CardItem.module.scss";
 export const CardItem = () => (
   <article className={style.card}>
     <div className={style.cardLink}>
-      <button className={style.cardFavorite}>
+      <button
+        className={style.cardFavorite}
+        aria-label="Кнопка добавления в избранное">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -24,7 +26,11 @@ export const CardItem = () => (
         <strong className={style.cardTitle}>Кресло с подлокотниками</strong>
         <span className={style.cardPrice}>5 000₽</span>
       </div>
-      <button className={style.cardBtn}>В корзину</button>
+      <button
+        className={style.cardBtn}
+        aria-label="Кнопка добавления в корзину">
+        В корзину
+      </button>
     </div>
   </article>
 );

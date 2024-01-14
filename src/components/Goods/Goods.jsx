@@ -3,9 +3,9 @@ import { CardItem } from "../CardItem/CardItem";
 import style from "./Goods.module.scss";
 
 export const Goods = () => (
-  <section>
+  <section className={style.goods}>
     <Container className={style.goods}>
-      <h1 className={`${style.title} visually-hidden}`}>Список товаров</h1>
+      <h1 className={`${style.title} hidden`}>Список товаров</h1>
       <ul className={style.list}>
         <li>
           <CardItem />

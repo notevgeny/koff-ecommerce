@@ -35,6 +35,7 @@
 html {
   box-sizing: border-box;
   position: relative;
+  height: 100%;
 }
 
 *,
@@ -43,10 +44,16 @@ html {
   box-sizing: inherit;
 }
 
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
 body {
   position: relative;
   min-width: 320px;
-  min-height: 100svh;
+  height: 100%;
   font-family: "Open Sans", sans-serif;
   line-height: 1.2;
   font-size: 12px;
@@ -56,6 +63,7 @@ body {
 
 main {
   min-height: 50svh;
+  flex: 1 1 auto;
 }
 
 img {
