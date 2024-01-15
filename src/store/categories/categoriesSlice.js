@@ -1,0 +1,53 @@
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+export const fetchCategories = createAsyncThunk(
+  "categories/fetchCategories",
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const tokenKey = state.auth.accessKey;
+
+    const response = await fetch(
+      "https://koff-api.vercel.app/api/productCategories", {
+        headers: {
+          'Authorization': `Bearer ${tokenKey}`,
+        }
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Не удалось получить список категорий");
+    }
+
+    return response.json();
+  },
+);
+
+const initialState = {
+  categories: [],
+  loading: false,
+  error: null,
+};
+
+const categoriesSlice = createSlice({
+  name: "categories",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchCategories.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchCategories.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.categories = action.payload;
+      })
+      .addCase(fetchCategories.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
+  },
+});
+
+export default categoriesSlice.reducer;

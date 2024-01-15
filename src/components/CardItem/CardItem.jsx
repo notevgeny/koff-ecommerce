@@ -1,10 +1,33 @@
 import style from "./CardItem.module.scss";
 
-export const CardItem = () => (
-  <article className={style.card}>
-    <div className={style.cardLink}>
+const API_URL = "https://koff-api.vercel.app/";
+
+export const CardItem = ({ good }) => {
+  const { id, price, name, images } = good;
+  return (
+    <article className={style.card}>
+      <a href={`/product/${id}`} className={style.link}>
+        <img
+          className={style.cardImg}
+          src={`${API_URL}${images[0]}`}
+          alt={name}
+        />
+      </a>
+      <div className={style.info}>
+        <strong className={style.title}>
+          <a href={`/product/${id}`} className={style.link}>
+            {name}
+          </a>
+        </strong>
+        <p className={style.price}>{price} ₽</p>
+      </div>
       <button
-        className={style.cardFavorite}
+        className={style.cardBtn}
+        aria-label="Кнопка добавления в корзину">
+        В корзину
+      </button>
+      <button
+        className={style.favorite}
         aria-label="Кнопка добавления в избранное">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -21,16 +44,6 @@ export const CardItem = () => (
           />
         </svg>
       </button>
-      <img className={style.cardImg} src="/src/assets/cardImage.png" alt="" />
-      <div className={style.cardInfo}>
-        <strong className={style.cardTitle}>Кресло с подлокотниками</strong>
-        <span className={style.cardPrice}>5 000₽</span>
-      </div>
-      <button
-        className={style.cardBtn}
-        aria-label="Кнопка добавления в корзину">
-        В корзину
-      </button>
-    </div>
-  </article>
-);
+    </article>
+  );
+};

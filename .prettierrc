@@ -1,8 +1,6 @@
 {
   "arrowParens": "always",
   "requireConfig": false,
-  "jsxSingleQuote": false,
-  "singleQuote": false,
   "trailingComma": "all",
   "tabWidth": 2,
   "semi": true,
@@ -14,7 +12,6 @@
   "insertPragma": false,
   "singleAttributePerLine": false,
   "proseWrap": "preserve",
-  "quoteProps": "as-needed",
   "requirePragma": false,
   "useTabs": false,
   "vueIndentScriptAndStyle": false,
