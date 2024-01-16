@@ -1,25 +1,32 @@
 import style from "./CardItem.module.scss";
 
-const API_URL = "https://koff-api.vercel.app/";
+import { API_URL } from "../../const";
+import { Link } from "react-router-dom";
 
 export const CardItem = ({ good }) => {
   const { id, price, name, images } = good;
   return (
     <article className={style.card}>
-      <a href={`/product/${id}`} className={style.link}>
+      <Link
+        to={`/product/${id}`}
+        className={style.link}
+        aria-label={`ссылка-картинка на товар ${name}`}>
         <img
           className={style.cardImg}
           src={`${API_URL}${images[0]}`}
           alt={name}
         />
-      </a>
+      </Link>
       <div className={style.info}>
         <strong className={style.title}>
-          <a href={`/product/${id}`} className={style.link}>
+          <Link
+            to={`/product/${id}`}
+            className={style.link}
+            aria-label={`ссылка на товар ${name}`}>
             {name}
-          </a>
+          </Link>
         </strong>
-        <p className={style.price}>{price} ₽</p>
+        <p className={style.price}>{price.toLocaleString()}&nbsp;₽</p>
       </div>
       <button
         className={style.cardBtn}

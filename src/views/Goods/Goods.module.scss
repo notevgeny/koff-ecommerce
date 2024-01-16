@@ -1,7 +1,16 @@
 .goods {
-    padding-top: 20px;
+    padding-top: 24px;
     padding-bottom: 20px;
+
+    @media (min-width: 580px) {
+        padding-top: 32px;
+    }
+
+    @media (min-width: 720px) {
+        padding-top: 40px;
+    }
 }
+
 .list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

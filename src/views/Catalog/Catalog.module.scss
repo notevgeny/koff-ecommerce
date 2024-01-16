@@ -11,29 +11,14 @@
     }
 }
   
-.container {
-    padding: 0;
-}
-  
 .list {
     overflow-x: auto;
-    padding: 0 16px;
     display: flex;
     gap: 4px;
     -webkit-overflow-scrolling: touch;
 
     &::-webkit-scrollbar {
         display: none;
-    }
-  
-    @media (min-width: 580px) {
-        padding: 0 29px;
-    }
-    @media (min-width: 820px) {
-        padding: 0 43px;
-    }
-    @media (min-width: 1120px) {
-        padding: 0 92px;
     }
 }
   

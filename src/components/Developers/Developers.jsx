@@ -20,7 +20,11 @@ export const Developers = () => (
       return (
         <div key={developer.id} className={style.developerItem}>
           {developer.spec}:{" "}
-          <a target="_blank" rel="noreferrer" href={developer.link}>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href={developer.link}
+            aria-label={`Ссылка на ${name}`}>
             {developer.name}
           </a>
         </div>
