@@ -1,6 +1,6 @@
 import style from "./Card.module.scss";
 import { Container } from "../../views/Container/Container";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchProduct } from "../../store/product/productSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,8 +8,6 @@ import { CardInfo } from "./CardInfo/CardInfo";
 import { CardSlider } from "./CardSlider/CardSlider";
 
 export const Card = () => {
-  const [mainSwiper, setMainSwiper] = useState(null);
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const { productId } = useParams();
 
   const dispatch = useDispatch();
@@ -41,16 +39,9 @@ export const Card = () => {
         <h1 className={style.title}>{name}</h1>
         <div className={style.wrapper}>
           {images?.length ? (
-            <CardSlider
-              mainSwiper={mainSwiper}
-              setMainSwiper={setMainSwiper}
-              setThumbsSwiper={setThumbsSwiper}
-              thumbsSwiper={thumbsSwiper}
-              images={images}
-              name={name}
-            />
+            <CardSlider images={images} name={name} />
           ) : (
-            ""
+            <div>Загрузка изображений...</div>
           )}
         </div>
         {!loading ? (

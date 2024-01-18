@@ -1,17 +1,14 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Thumbs } from "swiper/modules";
-
-import style from "../Card.module.scss";
+import { useState } from "react";
 import { API_URL } from "../../../const";
 
-export const CardSlider = ({
-  mainSwiper,
-  setMainSwiper,
-  setThumbsSwiper,
-  thumbsSwiper,
-  images,
-  name,
-}) => {
+import style from "../Card.module.scss";
+
+export const CardSlider = ({ images, name }) => {
+  const [mainSwiper, setMainSwiper] = useState(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
   return (
     <div className={style.picture}>
       <div className={style.sliderMain}>
