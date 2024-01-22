@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { CardInfo } from "./CardInfo/CardInfo";
 import { CardSlider } from "./CardSlider/CardSlider";
 
+import { FavoriteButton } from "../FavoriteButton/FavoriteButton";
+
 export const Card = () => {
   const { productId } = useParams();
 
@@ -33,6 +35,13 @@ export const Card = () => {
       </Container>
     );
 
+  if (!product)
+    return (
+      <Container>
+        <div>Продукт не найден, попробуйте позже</div>
+      </Container>
+    );
+
   return (
     <section>
       <Container className={style.container}>
@@ -54,6 +63,10 @@ export const Card = () => {
         ) : (
           <div>Загрузка описания...</div>
         )}
+        <div className={style.btns}>
+          <button className={style.orderBtn}>В корзину</button>
+          <FavoriteButton className={style.favorite} id={product.id} />
+        </div>
       </Container>
     </section>
   );

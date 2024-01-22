@@ -1,7 +1,5 @@
 import style from "../Card.module.scss";
 
-import LikeSVG from "../../../assets/heart.svg?react";
-
 export const CardInfo = ({ price, article, characteristics, loading }) => {
   return (
     <div className={style.info}>
@@ -19,12 +17,6 @@ export const CardInfo = ({ price, article, characteristics, loading }) => {
                 </li>
               ))}
             </ul>
-          </div>
-          <div className={style.btns}>
-            <button className={style.orderBtn}>В корзину</button>
-            <button className={style.favorite}>
-              <LikeSVG />
-            </button>
           </div>
         </>
       ) : (

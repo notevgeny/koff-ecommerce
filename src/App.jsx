@@ -10,6 +10,7 @@ import { Container } from "./views/Container/Container";
 import { Cart } from "./components/Cart/Cart";
 import { Card } from "./components/Card/Card";
 import { NotFound } from "./views/NotFound/NotFound";
+import { FavoritePage } from "./views/FavoritePage/FavoritePage";
 
 const router = createBrowserRouter([
   {
@@ -29,12 +30,7 @@ const router = createBrowserRouter([
     path: "/favorite",
     element: (
       <>
-        <Header />
-        <main>
-          <Catalog />
-          <Goods />
-        </main>
-        <Footer />
+        <FavoritePage />
       </>
     ),
   },

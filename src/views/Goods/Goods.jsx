@@ -4,9 +4,14 @@ import style from "./Goods.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchGoods } from "../../store/goods/goodsSlice";
+import { useSearchParams } from "react-router-dom";
 
-export const Goods = () => {
+export const Goods = ({ title }) => {
   const dispatch = useDispatch();
+  const [searchParam] = useSearchParams();
+  const category = searchParam.get("category");
+  const q = searchParam.get("q");
+  // const { pagination } = useSelector((state) => state.goods);
 
   const {
     goods,
@@ -15,8 +20,8 @@ export const Goods = () => {
   } = useSelector((state) => state.goods);
 
   useEffect(() => {
-    dispatch(fetchGoods());
-  }, [dispatch]);
+    dispatch(fetchGoods({ category, q }));
+  }, [dispatch, category, q]);
 
   if (loadingGoods)
     return (
@@ -35,14 +40,23 @@ export const Goods = () => {
   return (
     <section className={style.goods}>
       <Container>
-        <h1 className={`${style.title} hidden`}>Список товаров</h1>
-        <ul className={style.list}>
-          {goods.map((good) => (
-            <li className={style.itemList} key={good.id}>
-              <CardItem good={good} />
-            </li>
-          ))}
-        </ul>
+        {title ? (
+          <h1 className={`${style.title}`}>{title}</h1>
+        ) : (
+          <h1 className={`${style.title} hidden`}>Список товаров</h1>
+        )}
+
+        {goods.length ? (
+          <ul className={style.list}>
+            {goods.map((good) => (
+              <li className={style.itemList} key={good.id}>
+                <CardItem good={good} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>По вашему запросу товаров не найдено</p>
+        )}
       </Container>
     </section>
   );

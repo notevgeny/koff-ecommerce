@@ -4,7 +4,7 @@ import { Container } from "../../views/Container/Container";
 import { fetchCategories } from "../../store/categories/categoriesSlice";
 
 import style from "./Catalog.module.scss";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const Catalog = () => {
   const dispatch = useDispatch();
@@ -39,12 +39,12 @@ export const Catalog = () => {
         <ul className={style.list}>
           {categories.map((category, i) => (
             <li className={style.item} key={i}>
-              <Link
+              <NavLink
                 className={style.link}
-                to={`/category?slug=${category}`}
+                to={`/category?category=${category}`}
                 aria-label={`Категория ${category}`}>
                 {category}
-              </Link>
+              </NavLink>
             </li>
           ))}
         </ul>
