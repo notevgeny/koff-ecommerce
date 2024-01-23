@@ -7,12 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchGoods } from "../../store/goods/goodsSlice";
 import style from "../Goods/Goods.module.scss";
 import { Container } from "../Container/Container";
-import { useLocation } from "react-router-dom";
 
 export const FavoritePage = () => {
   const dispatch = useDispatch();
   const { favoriteList } = useSelector((state) => state.favorite);
-  console.log(useLocation());
 
   useEffect(() => {
     if (favoriteList) {

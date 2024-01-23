@@ -9,6 +9,9 @@ import { NavLink } from "react-router-dom";
 export const Catalog = () => {
   const dispatch = useDispatch();
 
+  const handleCategory = (category) =>
+    location.search === `?category=${encodeURIComponent(category)}`;
+
   const {
     categories,
     loading: loadingCategories,
@@ -40,7 +43,14 @@ export const Catalog = () => {
           {categories.map((category, i) => (
             <li className={style.item} key={i}>
               <NavLink
-                className={style.link}
+                className={`${style.link} ${
+                  handleCategory(category) ? style.linkActive : ""
+                }`}
+                // className={cn(style.link, {
+                //   [style.linkActive]:
+                //     location.search ===
+                //     `?category=${encodeURIComponent(category)}`,
+                // })}
                 to={`/category?category=${category}`}
                 aria-label={`Категория ${category}`}>
                 {category}

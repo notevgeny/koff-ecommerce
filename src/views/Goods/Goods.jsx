@@ -20,7 +20,9 @@ export const Goods = ({ title }) => {
   } = useSelector((state) => state.goods);
 
   useEffect(() => {
-    dispatch(fetchGoods({ category, q }));
+    if (location.pathname !== "/favorite") {
+      dispatch(fetchGoods({ category, q }));
+    }
   }, [dispatch, category, q]);
 
   if (loadingGoods)
