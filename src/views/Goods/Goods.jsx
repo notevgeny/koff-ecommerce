@@ -4,26 +4,29 @@ import style from "./Goods.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchGoods } from "../../store/goods/goodsSlice";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
+import { Pagination } from "../../components/Pagination/Pagination";
 
 export const Goods = ({ title }) => {
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
   const [searchParam] = useSearchParams();
   const category = searchParam.get("category");
   const q = searchParam.get("q");
-  // const { pagination } = useSelector((state) => state.goods);
+  const page = searchParam.get("page");
 
   const {
     goods,
     loading: loadingGoods,
     error: errorGoods,
+    pagination,
   } = useSelector((state) => state.goods);
 
   useEffect(() => {
-    if (location.pathname !== "/favorite") {
-      dispatch(fetchGoods({ category, q }));
+    if (pathname !== "/favorite") {
+      dispatch(fetchGoods({ category, q, page }));
     }
-  }, [dispatch, category, q]);
+  }, [dispatch, category, q, pathname, page]);
 
   if (loadingGoods)
     return (
@@ -49,13 +52,16 @@ export const Goods = ({ title }) => {
         )}
 
         {goods.length ? (
-          <ul className={style.list}>
-            {goods.map((good) => (
-              <li className={style.itemList} key={good.id}>
-                <CardItem good={good} />
-              </li>
-            ))}
-          </ul>
+          <>
+            <ul className={style.list}>
+              {goods.map((good) => (
+                <li className={style.itemList} key={good.id}>
+                  <CardItem good={good} />
+                </li>
+              ))}
+            </ul>
+            {pagination ? <Pagination pagination={pagination} /> : ""}
+          </>
         ) : (
           <p>По вашему запросу товаров не найдено</p>
         )}

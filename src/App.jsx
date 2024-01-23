@@ -7,7 +7,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Catalog } from "./views/Catalog/Catalog";
 import { Goods } from "./views/Goods/Goods";
 import { Container } from "./views/Container/Container";
-import { Cart } from "./components/Cart/Cart";
+import { Cart } from "./views/Cart/Cart";
 import { Card } from "./components/Card/Card";
 import { NotFound } from "./views/NotFound/NotFound";
 import { FavoritePage } from "./views/FavoritePage/FavoritePage";
