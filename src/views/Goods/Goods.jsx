@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { fetchGoods } from "../../store/goods/goodsSlice";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { Pagination } from "../../components/Pagination/Pagination";
+import { fetchCart } from "../../store/cart/cartSlice";
 
 export const Goods = ({ title }) => {
   const dispatch = useDispatch();
@@ -27,6 +28,10 @@ export const Goods = ({ title }) => {
       dispatch(fetchGoods({ category, q, page }));
     }
   }, [dispatch, category, q, pathname, page]);
+
+  useEffect(() => {
+    dispatch(fetchCart());
+  }, [dispatch]);
 
   if (loadingGoods)
     return (

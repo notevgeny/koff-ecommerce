@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 
 export const Control = () => {
   const { favoriteList } = useSelector((state) => state.favorite);
+  const { products } = useSelector((state) => state.cart);
 
   return (
     <ul className={style.control}>
@@ -26,7 +27,9 @@ export const Control = () => {
           to="/cart"
           className={style.controlLink}
           aria-label="Добавить в корзину">
-          <span className={style.controlLinkText}>Корзина (5)</span>
+          <span className={style.controlLinkText}>
+            Корзина {products.length ? `(${products.length})` : ""}
+          </span>
           <CartSVG />
         </Link>
       </li>

@@ -3,9 +3,11 @@ import style from "./CardItem.module.scss";
 import { API_URL } from "../../const";
 import { Link } from "react-router-dom";
 import { FavoriteButton } from "../FavoriteButton/FavoriteButton";
+import { CartButton } from "../CartButton/CartButton";
 
 export const CardItem = ({ good }) => {
   const { id, price, name, images } = good;
+
   return (
     <article className={style.card}>
       <Link
@@ -29,11 +31,7 @@ export const CardItem = ({ good }) => {
         </strong>
         <p className={style.price}>{price.toLocaleString()}&nbsp;₽</p>
       </div>
-      <button
-        className={style.cardBtn}
-        aria-label="Кнопка добавления в корзину">
-        В корзину
-      </button>
+      <CartButton className={style.cardBtn} id={id} />
       <FavoriteButton className={style.favorite} id={id} />
     </article>
   );
