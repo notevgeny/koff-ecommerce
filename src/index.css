@@ -110,3 +110,23 @@ h1, h2, h3, p, figure, fieldset {
 .swiper-wrapper {
   display: flex;
 }
+
+.cardBtn {
+  width: 100%;
+  padding: 12px 24px;
+  color: #780096;
+  border-radius: 32px;
+  border: 1px solid #780096;
+
+  &:hover {
+      color: #ffffff;
+      border-color: #9200b7;
+      background-color: #9200b7;
+  }
+
+  &:active {
+      color: #c0f;
+      border-color: #c0f;
+      background-color: transparent;
+  }
+}

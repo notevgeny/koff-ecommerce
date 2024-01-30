@@ -4,10 +4,11 @@ import { Container } from "../../views/Container/Container";
 import { fetchCategories } from "../../store/categories/categoriesSlice";
 
 import style from "./Catalog.module.scss";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 export const Catalog = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const handleCategory = (category) =>
     location.search === `?category=${encodeURIComponent(category)}`;

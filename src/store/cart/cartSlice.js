@@ -52,6 +52,58 @@ export const addProductToCart = createAsyncThunk(
   },
 );
 
+export const removeProductFromCart = createAsyncThunk(
+  "cart/removeProductFromCart",
+  async (productId, { getState, rejectWithValue }) => {
+    const state = getState();
+    const token = state.auth.accessKey;
+
+    try {
+      const response = await fetch(`${API_URL}api/cart/products/${productId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Не удалось удалить товар из корзины");
+      }
+
+      return await response.json();
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
+export const updateProductToCart = createAsyncThunk(
+  "cart/updateProductToCart",
+  async (productData, { getState, rejectWithValue }) => {
+    const state = getState();
+    const token = state.auth.accessKey;
+
+    try {
+      const response = await fetch(`${API_URL}api/cart/products`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(productData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Не удалось обновить товар в корзине");
+      }
+
+      return await response.json();
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
 const initialState = {
   products: [],
   totalPrice: 0,
@@ -70,7 +122,7 @@ const cartSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchCart.pending, (state) => {
-        state.loading = true;
+        state.loadingFetch = true;
         state.error = null;
         state.pagination = null;
       })
@@ -92,10 +144,60 @@ const cartSlice = createSlice({
       .addCase(addProductToCart.fulfilled, (state, action) => {
         state.loadingAdd = false;
         state.error = null;
-        state.products.push(action.payload);
+        state.totalCount = action.payload.totalCount;
+        state.products.push({
+          ...action.payload.product,
+          quantity: action.payload.productCart.quantity,
+        });
+        state.totalPrice = state.products.reduce(
+          (acc, item) => item.price * item.quantity + acc,
+          0,
+        );
       })
       .addCase(addProductToCart.rejected, (state, action) => {
         state.loadingAdd = false;
+        state.error = action.error.message;
+      })
+      .addCase(removeProductFromCart.pending, (state) => {
+        state.loadingRemove = true;
+        state.error = null;
+      })
+      .addCase(removeProductFromCart.fulfilled, (state, action) => {
+        state.loadingRemove = false;
+        state.error = null;
+        state.products = state.products.filter(
+          (item) => item.id !== action.payload.id,
+        );
+        state.totalPrice = state.products.reduce(
+          (acc, item) => item.price * item.quantity + acc,
+          0,
+        );
+        state.totalCount = action.payload.totalCount;
+      })
+      .addCase(removeProductFromCart.rejected, (state, action) => {
+        state.loadingRemove = false;
+        state.error = action.error.message;
+      })
+      .addCase(updateProductToCart.pending, (state) => {
+        state.loadingUpdate = true;
+        state.error = null;
+      })
+      .addCase(updateProductToCart.fulfilled, (state, action) => {
+        state.loadingUpdate = false;
+        state.error = null;
+        state.products = state.products.map((item) => {
+          if (item.id === action.payload.productCart.productId) {
+            item.quantity = action.payload.productCart.quantity;
+          }
+          return item;
+        });
+        state.totalPrice = state.products.reduce(
+          (acc, item) => item.price * item.quantity + acc,
+          0,
+        );
+      })
+      .addCase(updateProductToCart.rejected, (state, action) => {
+        state.loadingUpdate = false;
         state.error = action.error.message;
       });
   },

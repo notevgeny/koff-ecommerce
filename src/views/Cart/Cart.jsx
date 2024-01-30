@@ -11,7 +11,7 @@ import { useLocation } from "react-router-dom";
 export const Cart = () => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const { products, loadingFetch, totalPrice, totalCount } = useSelector(
+  const { products, totalPrice, totalCount } = useSelector(
     (state) => state.cart,
   );
 
@@ -20,6 +20,16 @@ export const Cart = () => {
       dispatch(fetchCart());
     }
   }, [dispatch, pathname]);
+
+  if (!totalCount) {
+    return (
+      <section className={style.cart}>
+        <Container className={style.container}>
+          <h1 className={style.title}>В корзине пусто</h1>
+        </Container>
+      </section>
+    );
+  }
 
   return (
     <section className={style.cart}>

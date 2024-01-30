@@ -1,4 +1,5 @@
 import style from "./CartPlace.module.scss";
+import { declOfNum } from "../../helpers/declOfNum";
 
 export const CartPlace = ({ totalCount, totalPrice }) => {
   return (
@@ -7,11 +8,7 @@ export const CartPlace = ({ totalCount, totalPrice }) => {
       <div className={style.placeInfo}>
         <p>
           {totalCount}
-          {totalCount === 1
-            ? " товар "
-            : totalCount > 1 && totalCount < 5
-              ? " товара "
-              : " товаров "}
+          {declOfNum(totalCount, [" товар ", " товара ", " товаров "])}
           на сумму:
         </p>
         <p>{totalPrice?.toLocaleString()}&nbsp;₽</p>

@@ -8,6 +8,7 @@ import { CardInfo } from "./CardInfo/CardInfo";
 import { CardSlider } from "./CardSlider/CardSlider";
 
 import { FavoriteButton } from "../FavoriteButton/FavoriteButton";
+import { ToggleCartButton } from "../ToggleCartButton/ToggleCartButton";
 
 export const Card = () => {
   const { productId } = useParams();
@@ -64,7 +65,7 @@ export const Card = () => {
           <div>Загрузка описания...</div>
         )}
         <div className={style.btns}>
-          <button className={style.orderBtn}>В корзину</button>
+          <ToggleCartButton className={style.orderBtn} id={product.id} />
           <FavoriteButton className={style.favorite} id={product.id} />
         </div>
       </Container>
