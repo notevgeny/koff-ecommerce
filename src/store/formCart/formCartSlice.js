@@ -38,7 +38,11 @@ const initialState = {
 const formCartSlice = createSlice({
   name: "formCart",
   initialState,
-  reducers: {},
+  reducers: {
+    clearSuccess: (state) => {
+      state.success = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(submitCartForm.pending, (state) => {
@@ -59,5 +63,7 @@ const formCartSlice = createSlice({
       });
   },
 });
+
+export const { clearSuccess } = formCartSlice.actions;
 
 export default formCartSlice.reducer;

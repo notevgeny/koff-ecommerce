@@ -5,11 +5,13 @@ import { useEffect } from "react";
 import { fetchOrder, clearOrder } from "../../store/order/orderSlice";
 import { Container } from "../../views/Container/Container";
 import { fetchCart } from "../../store/cart/cartSlice";
+import { clearSuccess } from "../../store/formCart/formCartSlice";
 
 export const Order = () => {
   const { orderId } = useParams();
   const dispatch = useDispatch();
   const { orderData, loading, error } = useSelector((state) => state.order);
+  // const { success } = useSelector(state => state.formCart);
 
   useEffect(() => {
     dispatch(fetchCart());
@@ -19,6 +21,7 @@ export const Order = () => {
     dispatch(fetchOrder(orderId));
     return () => {
       dispatch(clearOrder());
+      dispatch(clearSuccess());
     };
   }, [dispatch, orderId]);
 
