@@ -1,38 +1,82 @@
+import { useDispatch, useSelector } from "react-redux";
 import style from "./CartForm.module.scss";
+import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { submitCartForm } from "../../store/formCart/formCartSlice";
 
 export const CartForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const orderStatus = useSelector((state) => state.formCart);
+
+  useEffect(() => {
+    if (orderStatus.success) {
+      navigate(`/order/${orderStatus.orderId}`);
+    }
+  }, [orderStatus, navigate]);
+
+  const handleOnSubmit = (data) => {
+    dispatch(submitCartForm(data));
+  };
+
   return (
-    <form action="" className={style.form}>
+    <form
+      className={style.form}
+      id="orderForm"
+      onSubmit={handleSubmit(handleOnSubmit)}>
       <h2 className={style.subtitle}>Данные для доставки</h2>
       <fieldset className={style.fieldsetInput}>
-        <input
-          className={style.input}
-          type="text"
-          name="name"
-          placeholder="Фамилия Имя Отчество"
-        />
-        <input
-          className={style.input}
-          type="text"
-          name="phone"
-          placeholder="Телефон"
-        />
-        <input
-          className={style.input}
-          type="email"
-          name="email"
-          placeholder="E-mail"
-        />
-        <input
-          className={style.input}
-          type="text"
-          name="address"
-          placeholder="Адрес доставки"
-        />
+        <label>
+          <input
+            className={style.input}
+            type="text"
+            {...register("name", { required: true })}
+            placeholder="Фамилия Имя Отчество"
+          />
+          {errors.name && <p className={style.error}>Это поле обязательно</p>}
+        </label>
+        <label>
+          <input
+            className={style.input}
+            type="text"
+            {...register("phone", { required: true })}
+            placeholder="Телефон"
+          />
+          {errors.phone && <p className={style.error}>Это поле обязательно</p>}
+        </label>
+        <label>
+          <input
+            className={style.input}
+            type="email"
+            {...register("email", { required: true })}
+            placeholder="E-mail"
+          />
+          {errors.email && <p className={style.error}>Это поле обязательно</p>}
+        </label>
+        <label>
+          <input
+            className={style.input}
+            type="text"
+            {...register("address", { required: true })}
+            placeholder="Адрес доставки"
+          />
+          {errors.address && (
+            <p className={style.error}>Это поле обязательно</p>
+          )}
+        </label>
+
         <textarea
           className={style.textarea}
           placeholder="Комментарий к заказу"
-          name="comments"></textarea>
+          {...register("comments")}></textarea>
       </fieldset>
       <fieldset className={style.fieldsetRadio}>
         <legend className={style.legend}>Доставка</legend>
@@ -40,7 +84,7 @@ export const CartForm = () => {
           <input
             className={style.radioInput}
             type="radio"
-            name="deliveryType"
+            {...register("deliveryType")}
             value="delivery"
             defaultChecked
           />
@@ -50,7 +94,7 @@ export const CartForm = () => {
           <input
             className={style.radioInput}
             type="radio"
-            name="deliveryType"
+            {...register("deliveryType")}
             value="pickup"
           />
           Самовывоз
@@ -62,7 +106,7 @@ export const CartForm = () => {
           <input
             className={style.radioInput}
             type="radio"
-            name="paymentType"
+            {...register("paymentType")}
             value="card"
             defaultChecked
           />
@@ -72,7 +116,7 @@ export const CartForm = () => {
           <input
             className={style.radioInput}
             type="radio"
-            name="paymentType"
+            {...register("paymentType")}
             value="cash"
           />
           Наличными при получении
